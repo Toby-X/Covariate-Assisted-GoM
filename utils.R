@@ -1,3 +1,8 @@
+packages <- c("RSpectra", "FNN", "clue")
+## install all packages that are not already installed
+install.packages(setdiff(packages, rownames(installed.packages())))
+library(Matrix)
+
 .proj <- function(y, a = 1) {
     v <- y
     rho <- (sum(y) - a) / length(y)
@@ -44,4 +49,11 @@ HeteroPCA <- function(Sigma, K, max.iter = 20, eps = 1e-8) {
     }
     evd <- RSpectra::svds(Sigma, K)
     return(list(U = evd$u, iter = iter))
+}
+
+find_best_idx <- function(Pi, Pi_true) {
+  loss.mad <- t(apply(Pi_true, 2, function(x) colMeans(abs(x - Pi))))
+  od = clue::solve_LSAP(loss.mad)
+  
+  od
 }
