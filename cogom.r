@@ -89,6 +89,8 @@ find_best_alpha <- function(alpha_seq, A, X, K, eps = 1e-3, nfold = 5) {
     bool_mat.X <- matrix(idx.X == kk, nrow = n)
     A.tmp[as.logical(bool_mat.A)] <- 0
     X.tmp[as.logical(bool_mat.X)] <- 0
+    A.tmp <- A.tmp / sum(idx.A!=kk) * length(idx.A)
+    X.tmp <- X.tmp / sum(idx.X!=kk) * length(idx.X)
     cov.tmp <- gom.cov(A.tmp, X.tmp, K, alpha, eps)
     A.est <- cov.tmp$Pi %*% t(cov.tmp$Theta)
     err[kk] <- mean(abs(A[bool_mat.A] - A.est[bool_mat.A]))
