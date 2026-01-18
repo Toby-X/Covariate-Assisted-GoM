@@ -20,7 +20,13 @@ The code for the three simulations in the paper is in the `simulations` director
 
 ### Quick Start
 
-Input Format:R: $N \times J$ binary response matrix.X: $N \times W$ covariate matrix (continuous).K: Number of latent profiles.Rsource("cogom.r")
+**Input Format:**
+
+$\mathbf{R}$: $N \times J$ binary response matrix.
+
+$\mathbf{X}$: $N \times W$ covariate matrix (continuous).
+
+$K$: Number of latent profiles.
 
 ```R
 # 1. Load your data (Example with random generation not following the model assumptions)
